@@ -12,7 +12,7 @@ public class LoginTestCRM extends BaseClass
 	@Test
 	public static void loginApp()
 	{
-		
+		//comment added
 		System.out.println(driver.getTitle());
 		
 		logger = report.createTest("Login to CRM");
