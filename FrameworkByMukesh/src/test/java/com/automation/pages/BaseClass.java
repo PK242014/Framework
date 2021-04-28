@@ -10,6 +10,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import com.automation.utilities.BrowserFactory;
 import com.automation.utilities.ConfigDataProvider;
@@ -28,8 +29,7 @@ public class BaseClass {
 	public static ExtentTest logger;
 
 	@BeforeSuite()
-	public void SetUpSuite() 
-	{
+	public void SetUpSuite() {
 		Reporter.log("Setting up the reports and Test is getting ready", true);
 
 		excel = new ExcelDataProvider();
@@ -48,19 +48,23 @@ public class BaseClass {
 
 	}
 
+	@Parameters({"browser","URLtobeTested"})
 	@BeforeClass
-	public void setUp()
+	public void setUp(String browser, String url)
 	{
 
 		Reporter.log("Trying to start browser and getting application ready", true);
-		driver = BrowserFactory.startApplication(driver, config.getBrowser(), config.getStagingURL());
+
+		// driver = BrowserFactory.startApplication(driver, config.getBrowser(),
+		// config.getStagingURL());
+
+		driver = BrowserFactory.startApplication(driver, browser, url );
 
 		Reporter.log("Browser and application is up and runnning", true);
 	}
 
 	@AfterClass
-	public void tearDown()
-	{
+	public void tearDown() {
 		BrowserFactory.quitBrowser(driver);
 	}
 
